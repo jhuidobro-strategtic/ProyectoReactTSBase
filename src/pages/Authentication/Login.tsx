@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardBody, Col, Container, Input, Label, Row, Button, Form, FormFeedback, Alert, Spinner } from 'reactstrap';
-import ParticlesAuth from "../AuthenticationInner/ParticlesAuth";
+// import ParticlesAuth from "../AuthenticationInner/ParticlesAuth";
+import ParticlesJS from "../AuthenticationInner/ParticlesJS";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
@@ -14,9 +15,10 @@ import { useFormik } from "formik";
 // actions
 import { loginUser, socialLogin, resetLoginFlag } from "../../slices/thunks";
 
-import logoLight from "../../assets/images/logo-light.png";
+// import logoLight from "../../assets/images/logo-light.png";
 import { createSelector } from 'reselect';
 //import images
+import logologin from "../../assets/images/Grupo_Cayala_Color.png";
 
 const Login = (props: any) => {
     const dispatch: any = useDispatch();
@@ -90,145 +92,177 @@ const Login = (props: any) => {
         }
     }, [dispatch, errorMsg]);
 
-    document.title = "Basic SignIn | Velzon - React Admin & Dashboard Template";
+    document.title = "Login - StrategTIC";
     return (
         <React.Fragment>
-            <ParticlesAuth>
-                <div className="auth-page-content mt-lg-5">
-                    <Container>
-                        <Row>
-                            <Col lg={12}>
-                                <div className="text-center mt-sm-5 mb-4 text-white-50">
-                                    <div>
-                                        <Link to="/" className="d-inline-block auth-logo">
-                                            <img src={logoLight} alt="" height="20" />
-                                        </Link>
-                                    </div>
-                                    <p className="mt-3 fs-15 fw-medium">Premium Admin & Dashboard Template</p>
-                                </div>
-                            </Col>
-                        </Row>
+      <div className="auth-page-content">
+        <Container fluid className="px-0">
+          <Row className="min-vh-100 g-0">
+            {/* Imagen a la derecha */}
+            <Col md={6} className="d-none d-md-block position-relative">
+              <div className="auth-image-container h-100 w-100 position-relative">
+                <div
+                  className="h-100 w-100 bg-cover bg-center position-absolute"
+                  style={{
+                    backgroundImage: `url(${require("../../assets/images/cayala.jpg")})`,
+                    zIndex: 1,
+                    top: 0,
+                    left: 0,
+                  }}
+                ></div>
 
-                        <Row className="justify-content-center">
-                            <Col md={8} lg={6} xl={5}>
-                                <Card className="mt-4 card-bg-fill">
-                                    <CardBody className="p-4">
-                                        <div className="text-center mt-2">
-                                            <h5 className="text-primary">Welcome Back !</h5>
-                                            <p className="text-muted">Sign in to continue to Velzon.</p>
-                                        </div>
-                                        {error && error ? (<Alert color="danger"> {error} </Alert>) : null}
-                                        <div className="p-2 mt-4">
-                                            <Form
-                                                onSubmit={(e) => {
-                                                    e.preventDefault();
-                                                    validation.handleSubmit();
-                                                    return false;
-                                                }}
-                                                action="#">
+                <div
+                  className="h-100 w-100 position-absolute"
+                  style={{
+                    backgroundColor: "rgba(0, 0, 0, 0.2)",
+                    zIndex: 2,
+                    top: 0,
+                    left: 0,
+                  }}
+                ></div>
 
-                                                <div className="mb-3">
-                                                    <Label htmlFor="email" className="form-label">Email</Label>
-                                                    <Input
-                                                        name="email"
-                                                        className="form-control"
-                                                        placeholder="Enter email"
-                                                        type="email"
-                                                        onChange={validation.handleChange}
-                                                        onBlur={validation.handleBlur}
-                                                        value={validation.values.email || ""}
-                                                        invalid={
-                                                            validation.touched.email && validation.errors.email ? true : false
-                                                        }
-                                                    />
-                                                    {validation.touched.email && validation.errors.email ? (
-                                                        <FormFeedback type="invalid">{validation.errors.email}</FormFeedback>
-                                                    ) : null}
-                                                </div>
-
-                                                <div className="mb-3">
-                                                    <div className="float-end">
-                                                        <Link to="/forgot-password" className="text-muted">Forgot password?</Link>
-                                                    </div>
-                                                    <Label className="form-label" htmlFor="password-input">Password</Label>
-                                                    <div className="position-relative auth-pass-inputgroup mb-3">
-                                                        <Input
-                                                            name="password"
-                                                            value={validation.values.password || ""}
-                                                            type={passwordShow ? "text" : "password"}
-                                                            className="form-control pe-5"
-                                                            placeholder="Enter Password"
-                                                            onChange={validation.handleChange}
-                                                            onBlur={validation.handleBlur}
-                                                            invalid={
-                                                                validation.touched.password && validation.errors.password ? true : false
-                                                            }
-                                                        />
-                                                        {validation.touched.password && validation.errors.password ? (
-                                                            <FormFeedback type="invalid">{validation.errors.password}</FormFeedback>
-                                                        ) : null}
-                                                        <button className="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon" onClick={() => setPasswordShow(!passwordShow)}><i className="ri-eye-fill align-middle"></i></button>
-                                                    </div>
-                                                </div>
-
-                                                <div className="form-check">
-                                                    <Input className="form-check-input" type="checkbox" value="" id="auth-remember-check" />
-                                                    <Label className="form-check-label" htmlFor="auth-remember-check">Remember me</Label>
-                                                </div>
-
-                                                <div className="mt-4">
-                                                    <Button color="success"
-                                                        disabled={loader && true}
-                                                        className="btn btn-success w-100" type="submit">
-                                                        {loader && <Spinner size="sm" className='me-2'> Loading... </Spinner>}
-                                                        Sign In
-                                                    </Button>
-                                                </div>
-
-                                                <div className="mt-4 text-center">
-                                                    <div className="signin-other-title">
-                                                        <h5 className="fs-13 mb-4 title">Sign In with</h5>
-                                                    </div>
-                                                    <div>
-                                                        <Link
-                                                            to="#"
-                                                            className="btn btn-primary btn-icon me-1"
-                                                            onClick={e => {
-                                                                e.preventDefault();
-                                                                socialResponse("facebook");
-                                                            }}
-                                                        >
-                                                            <i className="ri-facebook-fill fs-16" />
-                                                        </Link>
-                                                        <Link
-                                                            to="#"
-                                                            className="btn btn-danger btn-icon me-1"
-                                                            onClick={e => {
-                                                                e.preventDefault();
-                                                                socialResponse("google");
-                                                            }}
-                                                        >
-                                                            <i className="ri-google-fill fs-16" />
-                                                        </Link>
-                                                        <Button color="dark" className="btn-icon"><i className="ri-github-fill fs-16"></i></Button>{" "}
-                                                        <Button color="info" className="btn-icon"><i className="ri-twitter-fill fs-16"></i></Button>
-                                                    </div>
-                                                </div>
-                                            </Form>
-                                        </div>
-                                    </CardBody>
-                                </Card>
-
-                                <div className="mt-4 text-center">
-                                    <p className="mb-0">Don't have an account ? <Link to="/register" className="fw-semibold text-primary text-decoration-underline"> Signup </Link> </p>
-                                </div>
-
-                            </Col>
-                        </Row>
-                    </Container>
+                <div
+                  className="position-absolute w-100 h-100 d-flex flex-column align-items-center justify-content-center text-white text-center"
+                  style={{ zIndex: 3, color: "white" }}
+                >
+                  <div className="w-50 border-top border-white mb-4 fade-in-scale"></div>
+                  <h3
+                    className="montserrat fs-3.5 fs-lg-1 mb-2 fade-in-scale delay-1"
+                    style={{ color: "white" }}
+                  >
+                    BIENVENIDO A
+                  </h3>
+                  <h1
+                    className="montserrat-bold display-4 fw-bold fade-in-scale delay-2"
+                    style={{ color: "white" }}
+                  >
+                    STRATEGTIC
+                  </h1>
+                  <div className="w-50 border-top border-white mt-4 fade-in-scale delay-3"></div>
                 </div>
-            </ParticlesAuth>
-        </React.Fragment>
+
+                <div
+                  className="position-absolute w-100 h-100"
+                  style={{ zIndex: 4 }}
+                >
+                  <ParticlesJS />
+                </div>
+              </div>
+            </Col>
+
+            {/* Login a la izquierda */}
+            <Col
+              md={6}
+              className="d-flex align-items-center justify-content-center"
+            >
+              <div className="w-100 p-4" style={{ maxWidth: "400px" }}>
+                <Card className="shadow-sm border-0 cardDatosIniciales">
+                  <CardBody className="p-4">
+                    <div className="text-center mt-2">
+                      <img src={logologin} alt="Cayalá Logo" height="135" />
+                    </div>
+                    {error && <Alert color="danger">{error}</Alert>}
+
+                    <Form
+                      className="mt-4"
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        validation.handleSubmit();
+                        return false;
+                      }}
+                    >
+                      <div className="mb-3">
+                        <Label htmlFor="user" className="form-label">
+                          Usuario
+                        </Label>
+                        <Input
+                          name="email"
+                          type="text"
+                          placeholder="Ingrese su usuario"
+                          value={validation.values.email || ""}
+                          onChange={validation.handleChange}
+                          onBlur={validation.handleBlur}
+                          invalid={
+                            !!(
+                              validation.touched.email &&
+                              validation.errors.email
+                            )
+                          }
+                        />
+                        {validation.touched.email &&
+                          validation.errors.email && (
+                            <FormFeedback type="invalid">
+                              {validation.errors.email}
+                            </FormFeedback>
+                          )}
+                      </div>
+
+                      <div className="mb-3">
+                        <Label htmlFor="password" className="form-label">
+                          Contraseña
+                        </Label>
+                        <div className="position-relative auth-pass-inputgroup mb-3">
+                          <Input
+                            name="password"
+                            value={validation.values.password || ""}
+                            type={passwordShow ? "text" : "password"}
+                            placeholder="Ingrese su contraseña"
+                            onChange={validation.handleChange}
+                            onBlur={validation.handleBlur}
+                            invalid={
+                              !!(
+                                validation.touched.password &&
+                                validation.errors.password
+                              )
+                            }
+                          />
+                          {validation.touched.password &&
+                            validation.errors.password && (
+                              <FormFeedback type="invalid">
+                                {validation.errors.password}
+                              </FormFeedback>
+                            )}
+                          <button
+                            type="button"
+                            className="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted"
+                            onClick={() => setPasswordShow(!passwordShow)}
+                          >
+                            <i className="ri-eye-fill align-middle"></i>
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="mt-4">
+                        <Button
+                          type="submit"
+                          className="w-100 custom-button"
+                          disabled={loader}
+                        >
+                          {loader && <Spinner size="sm" className="me-2" />}{" "}
+                          Iniciar Sesión
+                        </Button>
+                      </div>
+                    </Form>
+                  </CardBody>
+                </Card>
+
+                <div className="mt-4 text-center">
+                  <p className="mb-0">
+                    ¿No tienes una cuenta?{" "}
+                    <Link
+                      to="/register"
+                      className="fw-semibold text-primary text-decoration-underline"
+                    >
+                      Regístrate
+                    </Link>
+                  </p>
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+    </React.Fragment>
     );
 };
 
