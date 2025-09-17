@@ -19,6 +19,7 @@ import { loginUser, socialLogin, resetLoginFlag } from "../../slices/thunks";
 import { createSelector } from 'reselect';
 //import images
 import logologin from "../../assets/images/Grupo_Cayala_Color.png";
+import fondoCayala from "../../assets/images/cayala.jpg";
 
 const Login = (props: any) => {
     const dispatch: any = useDispatch();
@@ -104,7 +105,7 @@ const Login = (props: any) => {
                 <div
                   className="h-100 w-100 bg-cover bg-center position-absolute"
                   style={{
-                    backgroundImage: `url(${require("../../assets/images/cayala.jpg")})`,
+                    backgroundImage: `url(${fondoCayala})`,
                     zIndex: 1,
                     top: 0,
                     left: 0,
